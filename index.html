@@ -13,8 +13,8 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AllCare IPA — Care Manager NaviStation</title>
-  <meta name="description" content="AllCare IPA Patient Health Navigation Station for HEDIS/STARS gap closure and pharmacy adherence. Synthetic data demonstration." />
+  <title>UM-Aid IPA — Care Manager NaviStation</title>
+  <meta name="description" content="UM-Aid IPA Patient Health Navigation Station for HEDIS/STARS gap closure and pharmacy adherence. Synthetic data demonstration." />
   <!-- Play CDN: fine for local demos; for production use a built Tailwind CSS bundle (no remote JS compiler). -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin="anonymous" src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
@@ -121,7 +121,7 @@
 
     /* ── Blue Accessibility theme (for users with red-green color vision deficiency) */
     [data-theme="blue-a11y"] {
-      /* Colorblind-friendly accessible theme — per AllCare IPA spec for an employee  */
+      /* Colorblind-friendly accessible theme — per UM-Aid IPA spec for an employee  */
       /* with red/green color vision deficiency. Semantic colors are ALWAYS paired   */
       /* with icons + text labels (the app already does this); palette additionally  */
       /* avoids pure red/green and orange/blue pairings.                              */
@@ -1668,7 +1668,7 @@
 <body>
   <div id="loading">
     <div class="loading-inner">
-      <div class="loading-kicker">AllCare IPA · Quality Operations</div>
+      <div class="loading-kicker">UM-Aid IPA · Quality Operations</div>
       <div class="loading-logo">Care Manager <em>NaviStation</em></div>
       <div class="loading-tagline">HEDIS &amp; STARS · Measurement Year 2026</div>
       <div class="loading-bar"><div class="loading-bar-fill"></div></div>
@@ -2141,7 +2141,7 @@
     const PHARM_ADDRS   = ['1200 Crenshaw Blvd','4500 Sepulveda Blvd','890 Artesia Blvd','2200 Imperial Hwy','3100 Marine Ave','5600 Vermont Ave','700 W Manchester Blvd','1400 Pacific Coast Hwy'];
     const PRESCRIBERS_FIRST = ['James','Maria','Robert','Linda','Kevin','Susan','Carlos','Patricia'];
     const PRESCRIBERS_LAST  = ['Ashford','Rutherford','Holloway','Langford','Sinclair','Thornberry','Ellsworth','Kensington'];
-    const MSO_NAMES    = ['Pacific IPA Management','Western Medical Associates','SoCal Provider Group','AllCare Medical Operations'];
+    const MSO_NAMES    = ['Pacific IPA Management','Western Medical Associates','SoCal Provider Group','UM-Aid Medical Operations'];
     const PPG_NAMES    = ['South Bay Physicians','Harbor Medical Group','LA Care Partners','Westside Primary Care','Central Valley PPG'];
     const LIS_CATS     = ['Full LIS','Partial LIS 25%','Partial LIS 50%','Partial LIS 75%','No LIS'];
 
@@ -2188,7 +2188,7 @@
     // ── Provider / PCP data pools ─────────────────────────────────────────────
     const PRACTICE_NAMES = [
       'South Bay Internal Medicine','Pacific Family Health Center','Harbor View Medical Group',
-      'Westside Primary Care Associates','AllCare Medical Group','Valley Physicians Group',
+      'Westside Primary Care Associates','UM-Aid Medical Group','Valley Physicians Group',
       'Coastal Family Medicine','Desert Oasis Health Center','Sunrise Medical Associates',
       'Golden State Primary Care','Inland Empire Medical Group','SoCal Health Partners',
       'Bay Area Family Practice','Central Valley Medical Associates','Pacific Coast Physicians',
@@ -2666,7 +2666,7 @@
       // text editor; for Excel-clean import, users can strip the first few
       // lines or wrap them under the column heading row.
       const metaLines = [
-        ['# AllCare IPA — ' + (meta.title || 'Export')],
+        ['# UM-Aid IPA — ' + (meta.title || 'Export')],
         ['# Exported by', meta.exportedBy || 'unknown'],
         ['# Exported at', new Date().toISOString()],
         ...(meta.extra || []).map(line => Array.isArray(line) ? line : [line]),
@@ -2895,7 +2895,7 @@
           </div>
           <div className="w-full max-w-md px-4">
             <div className="text-center mb-10">
-              <div className="font-ui text-[11px] tracking-[0.3em] text-[var(--accent)] mb-3">AllCare IPA · QUALITY OPERATIONS</div>
+              <div className="font-ui text-[11px] tracking-[0.3em] text-[var(--accent)] mb-3">UM-Aid IPA · QUALITY OPERATIONS</div>
               <h1 className="font-display text-5xl leading-tight font-medium">Care Manager <em className="italic text-[var(--accent)] font-normal">NaviStation</em></h1>
               <p className="font-ui text-sm text-[var(--muted)] mt-3">HEDIS · STARS · Pharmacy</p>
             </div>
@@ -4216,7 +4216,7 @@
         // see teammates or unassigned members, source from the full member
         // universe (not just `myMembers`). This is the "pharmacy coordination"
         // workflow: the CM is on a call to one pharmacy and wants to see every
-        // AllCare member there to batch outreach. Otherwise — and by default —
+        // UM-Aid member there to batch outreach. Otherwise — and by default —
         // they only see their own assigned worklist.
         const pharmacyActive = filters.pharmacy && filters.pharmacy !== 'All';
         const expandedScope = pharmacyActive && (filters.scope === 'all' || filters.scope === 'unassigned');
@@ -4820,7 +4820,7 @@
             <div className="max-w-[1440px] mx-auto px-6 py-6">
               <div className="flex items-start justify-between gap-8 flex-wrap">
                 <div>
-                  <div className="font-ui text-[11px] tracking-[0.25em] text-[var(--accent)] mb-1">AllCare IPA · QUALITY OPERATIONS</div>
+                  <div className="font-ui text-[11px] tracking-[0.25em] text-[var(--accent)] mb-1">UM-Aid IPA · QUALITY OPERATIONS</div>
                   <h1 className="font-display text-5xl md:text-6xl leading-[0.95] tracking-tight font-medium masthead-display-opsz">
                     Care Manager <span className="text-[var(--accent)] font-medium">NaviStation</span>
                   </h1>
@@ -4958,7 +4958,7 @@
               <div className="flex items-center gap-4">
                 <span>NCQA HEDIS® MY2026</span>
                 <span>CMS Star Ratings 2026</span>
-                <span>AllCare IPA · v2.0.0-demo</span>
+                <span>UM-Aid IPA · v2.0.0-demo</span>
               </div>
             </div>
           </footer>
@@ -5572,7 +5572,7 @@
 
     // Color tags from the team's worklist file (highlighted columns)
     const RECORD_SOURCE_COLORS = {
-      allcare:     { hex: '#2563eb', label: 'Blue',   text: '#ffffff' },
+      UM-Aid:     { hex: '#2563eb', label: 'Blue',   text: '#ffffff' },
       newvision:   { hex: '#ea580c', label: 'Orange', text: '#ffffff' },
       careconn:    { hex: '#facc15', label: 'Yellow', text: '#111111' },
       pcpsubmit:   { hex: '#6b7280', label: 'Gray',   text: '#ffffff' },
@@ -5581,12 +5581,12 @@
 
     const RECORD_SOURCES = [
       {
-        id: 'allcare', priority: 1,
-        name: 'AllCare Clinic Visits',
-        color: RECORD_SOURCE_COLORS.allcare,
+        id: 'UM-Aid', priority: 1,
+        name: 'UM-Aid Clinic Visits',
+        color: RECORD_SOURCE_COLORS.UM-Aid,
         path: 'I:\\Encounters for Healthplans\\Encounters for Healthplans 2026',
         url: 'file:///I:/Encounters%20for%20Healthplans/Encounters%20for%20Healthplans%202026',
-        desc: 'Encounters captured from AllCare clinic visits. First place to look for in-network documentation.',
+        desc: 'Encounters captured from UM-Aid clinic visits. First place to look for in-network documentation.',
         worklistMarker: 'Blue-highlighted fields in the worklist correspond to this source.',
       },
       {
@@ -5595,7 +5595,7 @@
         color: RECORD_SOURCE_COLORS.newvision,
         path: 'Y:\\STAR and AMP Projects\\NewVision Chart Retrieval\\2026\\Downloads\\charts',
         url: 'file:///Y:/STAR%20and%20AMP%20Projects/NewVision%20Chart%20Retrieval/2026/Downloads/charts',
-        desc: 'PCP charts retrieved through the New Vision vendor pull. Use when AllCare encounter does not contain the needed evidence.',
+        desc: 'PCP charts retrieved through the New Vision vendor pull. Use when UM-Aid encounter does not contain the needed evidence.',
         worklistMarker: 'Orange-highlighted fields in the worklist correspond to this source.',
       },
       {
@@ -6271,7 +6271,7 @@
     // ── Gap Guide View ─────────────────────────────────────────────────────────
     // The reference manual for closing HEDIS / STARS gaps: uploadable measures,
     // medical record sources, and the health plan portals where evidence gets
-    // submitted. Mirrors the AllCare IPA Gap Measure Guide.
+    // submitted. Mirrors the UM-Aid IPA Gap Measure Guide.
     function GapGuideView({ compact = false }) {
       const [subTab, setSubTab] = useState('upload');
 
@@ -6593,7 +6593,7 @@
 
       const handleExport = () => {
         const meta = [
-          ['# AllCare IPA — Measure Overview Export'],
+          ['# UM-Aid IPA — Measure Overview Export'],
           ['# Exported by', currentUser ? `${currentUser.name} (${currentUser.id})` : 'unknown'],
           ['# Exported at', new Date().toISOString()],
           ['# Health plan filter', planFilter],
@@ -6613,7 +6613,7 @@
         const blob = new Blob([csv], { type: 'text/csv' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a'); a.href = url;
-        a.download = `AllCare_MeasureOverview_${planFilter}_${new Date().toISOString().slice(0,10)}.csv`;
+        a.download = `UM-Aid_MeasureOverview_${planFilter}_${new Date().toISOString().slice(0,10)}.csv`;
         a.click(); URL.revokeObjectURL(url);
       };
 
@@ -7474,7 +7474,7 @@
           ];
         });
         downloadCsv({
-          filename: `AllCare_Worklist_${currentUser.id}_${new Date().toISOString().slice(0,10)}.csv`,
+          filename: `UM-Aid_Worklist_${currentUser.id}_${new Date().toISOString().slice(0,10)}.csv`,
           headers, rows,
           meta: {
             title: 'Worklist Export',
@@ -7503,7 +7503,7 @@
                   </h2>
                   <p className="font-ui text-sm text-[var(--muted)] mt-1">
                     {scope === 'all'
-                      ? <>Expanded coordination view — showing every AllCare member at this location regardless of assigned CM. Yours are highlighted with a teal accent. Cross-CM actions are logged with both names.</>
+                      ? <>Expanded coordination view — showing every UM-Aid member at this location regardless of assigned CM. Yours are highlighted with a teal accent. Cross-CM actions are logged with both names.</>
                       : <>Orphaned members at this location with no assigned CM. Claim a member to add them to your worklist.</>}
                   </p>
                 </>
@@ -11411,7 +11411,7 @@
             </div>
             {/* Footer */}
             <footer className="border-t-2 hairline px-5 py-3 shrink-0 bg-[var(--elevated)] flex items-center justify-between font-ui text-[10px] uppercase tracking-wider text-[var(--muted)]">
-              <span>AllCare IPA · NaviStation v3.2 · Field Guide</span>
+              <span>UM-Aid IPA · NaviStation v3.2 · Field Guide</span>
               <span className="flex items-center gap-2">
                 <span className="hidden sm:inline">Logged: {currentUser?.name}</span>
                 <span>· <Kbd>Esc</Kbd> to close</span>
@@ -11836,7 +11836,7 @@
             </button>
           </div>
           <div className="print-only print-header">
-            <div style={{fontSize:'11px',letterSpacing:'0.15em',textTransform:'uppercase',color:'#444'}}>AllCare IPA · Care Manager NaviStation · Member Summary</div>
+            <div style={{fontSize:'11px',letterSpacing:'0.15em',textTransform:'uppercase',color:'#444'}}>UM-Aid IPA · Care Manager NaviStation · Member Summary</div>
             <div style={{fontSize:'18px',fontWeight:600,marginTop:'4px'}}>{phiVisible ? `${member.last}, ${member.first}` : member.initials} · {member.id}</div>
             <div style={{fontSize:'11px',marginTop:'2px',color:'#444'}}>
               Printed by {currentUser.name} on {new Date().toLocaleString('en-US',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})} PT · PHI {phiVisible ? 'REVEALED' : 'masked'}
@@ -12823,7 +12823,7 @@
           phiVisible ? (m.mobileFull || m.mobile || '') : (m.mobile || ''),
         ]);
         downloadCsv({
-          filename: `AllCare_OutreachQueue_${(currentUser && currentUser.id) || 'user'}_${new Date().toISOString().slice(0,10)}.csv`,
+          filename: `UM-Aid_OutreachQueue_${(currentUser && currentUser.id) || 'user'}_${new Date().toISOString().slice(0,10)}.csv`,
           headers, rows,
           meta: {
             title: 'Outreach Queue Export',
@@ -13171,7 +13171,7 @@
           ];
         });
         downloadCsv({
-          filename: `AllCare_Activity_${currentUser.id}_${new Date().toISOString().slice(0,10)}.csv`,
+          filename: `UM-Aid_Activity_${currentUser.id}_${new Date().toISOString().slice(0,10)}.csv`,
           headers, rows,
           meta: {
             title: 'Activity / Audit Trail',
@@ -13340,7 +13340,7 @@
 
           <div className="mt-4 border hairline p-4 bg-[var(--elevated)] font-ui text-xs text-[var(--muted)]">
             <span className="font-semibold text-[var(--text)] uppercase tracking-[0.15em] text-[10px]">Audit policy: </span>
-            All contact log entries are immutable once saved. Each entry records: care manager identity, timestamp, member ID, measure, outcome, and notes. This log replaces manual Excel tracking and provides real-time leadership visibility per AllCare IPA quality operations policy.
+            All contact log entries are immutable once saved. Each entry records: care manager identity, timestamp, member ID, measure, outcome, and notes. This log replaces manual Excel tracking and provides real-time leadership visibility per UM-Aid IPA quality operations policy.
           </div>
         </div>
       );
