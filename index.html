@@ -1,1 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function () {
+      try {
+        var k = 'acm-theme', s = localStorage.getItem(k);
+        if (s === 'light' || s === 'dark' || s === 'blue-a11y') {
+          document.documentElement.setAttribute('data-theme', s);
+          return;
+        }
+      } catch (e) {}
+      var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UM-Aid IPA — Care Manager NaviStation</title>
+  <meta name="description"
+        content="UM-Aid IPA Patient Health Navigation Station for HEDIS/STARS gap closure and pharmacy adherence. Synthetic data demonstration." />
+  <!-- Play CDN: fine for local demos; for production use a built Tailwind CSS bundle (no remote JS compiler). -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin="anonymous"
+          src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
+          integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z"></script>
+  <script crossorigin="anonymous"
+          src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
+          integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1"></script>
+  <script crossorigin="anonymous"
+          src="https://unpkg.com/@babel/standalone@7.26.4/babel.min.js"
+          integrity="sha384-x/ilTFv/u/eu6YSmkFDZl5V5Mm/pkxxcVv2cVJOrr1J0rvILhMvRBCy6yA75wYBj"></script>
+  <script crossorigin="anonymous"
+          src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"
+          integrity="sha384-hJnF5AwidE18GSWTAGHv3ByzzvfNZ1Tcx5y1UUV3WkauuMCEzBJBMSwSt/PUPXnM"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter+Tight:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ── Light theme (default) — warm SaaS palette ────────────────────── */
+    :root,
+    [data-theme="light"] {
+      --bg: #fbf7f0;
+      --surface: #ffffff;
+      --elevated: #f5ede0;
+      --inverse: #2d2422;
+      --on-inverse: #fdf6ec;
+      --accent: #1f4a4a;
+      --on-accent: #fdf6ec;
+      --accent-soft: #2d6363;
+      --secondary: #b8748a;
+      --secondary-soft: #f3e0e6;
+      --success: #4a6b52;
+      --success-soft: #e8f0e8;
+      --text: #2a1f1d;
+      --muted: #5a524a;
+      --subtle: #8a7f78;
+      --dim: #c9bfae;
+      --placeholder: #a39684;
+      --ribbon-bg: #2d2422;
+      --ribbon-text: #fdf6ec;
+      --ribbon-muted: #c9bfae;
+      --status-warn: #d97b4e;
+      --status-critical: #a83232;
+      --signout-color: #a83232;
+      --kpi-sub: #c9e0d8;
+      --progress-track: #ebe1d0;
+      --border-color: #d9cdb6;
+      --border-strong: #b5a584;
+      --bg-secondary: #f5ecda;
+      --shadow-sm: 0 1px 2px rgba(45, 36, 34, .04), 0 1px 3px rgba(45, 36, 34, .05);
+      --shadow-md: 0 2px 4px rgba(45, 36, 34, .06), 0 4px 12px rgba(45, 36, 34, .06);
+      --shadow-lg: 0 4px 8px rgba(45, 36, 34, .08), 0 12px 24px rgba(45, 36, 34, .08);
+      --radius-card: 12px;
+      --radius-btn: 8px;
+      --radius-input: 6px;
+      --radius-pill: 9999px;
+    }
 
+    /* ── Dark theme — warm "evening edition" palette ───────────────────── */
+    [data-theme="dark"] {
+      --bg: #181715;
+      --surface: #2a2826;
+      --elevated: #36342f;
+      --bg-secondary: #2f2d2a;
+      --ribbon-bg: #131210;
+      --ribbon-text: #d8d6cf;
+      --ribbon-muted: #9c9a90;
+
+      --inverse: #d8d6cf;
+      --on-inverse: #181715;
+      --accent: #7fb0b8;
+      --on-accent: #14242a;
+      --accent-soft: #4a8284;
+      --secondary: #b8a0a8;
+      --secondary-soft: #3a2f33;
+      --success: #88b094;
+      --success-soft: #2a3a35;
+
+      --text: #d8d6cf;
+      --muted: #a09c91;
+      --subtle: #82807a;
+      --dim: #62605a;
+      --placeholder: #76746c;
+
+      --status-warn: #c8a288;
+      --status-critical: #b88080;
+      --signout-color: #b88080;
+
+      --kpi-sub: #2f2d28;
+      --progress-track: #383530;
+      --border-color: #383530;
+      --border-strong: #4d4a44;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, .22), 0 1px 3px rgba(0, 0, 0, .26);
+      --shadow-md: 0 2px 4px rgba(0, 0, 0, .26), 0 4px 12px rgba(0, 0, 0, .30);
+      --shadow-lg: 0 4px 8px rgba(0, 0, 0, .34), 0 12px 24px rgba(0, 0, 0, .38);
+      --radius-card: 12px;
+      --radius-btn: 8px;
+      --radius-input: 6px;
+      --radius-pill: 9999px;
+    }
+
+    /* ── Blue accessibility theme — colorblind-friendly ─────────────────── */
+    [data-theme="blue-a11y"] {
+      --bg: #F0F4F8;
+      --surface: #FFFFFF;
+      --elevated: #E1E9F0;
+      --bg-secondary: #D5E0EA;
+
+      --inverse: #0A2540;
+      --on-inverse: #E8F1F8;
+
+      --accent: #4C8BF5;
+      --on-accent: #FFFFFF;
+      --accent-soft: #7EB8DA;
+      --secondary: #7EB8DA;
+      --secondary-soft: #B4D2E7;
+
+      --success: #2E7D9A;
+      --success-soft: #B4D2E7;
+      --status-warn: #E6A23C;
+      --status-critical: #C45B4A;
+      --signout-color: #C45B4A;
+
+      --text: #0A2540;
+      --muted: #2D4A66;
+      --subtle: #4A6A8C;
+      --dim: #6A8AAC;
+      --placeholder: #7A98B5;
+
+      --ribbon-bg: #0A2540;
+      --ribbon-text: #E8F1F8;
+      --ribbon-muted: #B4D2E7;
+
+      --kpi-sub: #B4D2E7;
+      --progress-track: #D5E0EA;
+      --border-color: #B4D2E7;
+      --border-strong: #7EB8DA;
+
+      --shadow-sm: 0 1px 2px rgba(10, 37, 64, .08), 0 1px 3px rgba(10, 37, 64, .10);
+      --shadow-md: 0 2px 4px rgba(10, 37, 64, .12), 0 4px 12px rgba(10, 37, 64, .12);
+      --shadow-lg: 0 4px 8px rgba(10, 37, 64, .16), 0 12px 24px rgba(10, 37, 64, .18);
+      --radius-card: 12px;
+      --radius-btn: 8px;
+      --radius-input: 6px;
+      --radius-pill: 9999px;
+    }
+
+    /* Base layout, typography, utilities (trimmed from original) */
+    *::before,
+    *::after,
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter Tight", -apple-system, system-ui, sans-serif;
+    }
+
+    .font-display {
+      font-family: "Fraunces", Georgia, serif;
+      font-optical-sizing: auto;
+    }
+
+    .font-ui {
+      font-family: "Inter Tight", -apple-system, system-ui, sans-serif;
+    }
+
+    .hairline {
+      border-color: var(--border-color) !important;
+    }
+
+    [data-theme="dark"] .hairline {
+      border-color: #3a3128 !important;
+    }
+
+    .bg-var--surface {
+      background: var(--surface);
+    }
+
+    .bg-var--elevated {
+      background: var(--elevated);
+    }
+
+    .bg-var--bg {
+      background: var(--bg);
+    }
+
+    .text-var--text {
+      color: var(--text);
+    }
+
+    .text-var--muted {
+      color: var(--muted);
+    }
+
+    .text-var--subtle {
+      color: var(--subtle);
+    }
+
+    .text-var--ribbon-muted {
+      color: var(--ribbon-muted);
+    }
+
+    .text-signout {
+      color: var(--signout-color) !important;
+    }
+
+    .shadow-sm {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .shadow-md {
+      box-shadow: var(--shadow-md);
+    }
+
+    .shadow-lg {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .ribbon-bar {
+      background: var(--ribbon-bg);
+      color: var(--ribbon-text);
+    }
+
+    .preview-strip {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 8000;
+      background: var(--inverse);
+      color: var(--on-inverse);
+      font-family: "Inter Tight", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .preview-strip .preview-tag {
+      background: var(--status-warn);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 2px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+    }
+
+    .preview-strip .preview-sep {
+      opacity: 0.4;
+    }
+
+    body {
+      padding-bottom: 32px;
+    }
+
+    @media print {
+      .preview-strip {
+        display: none !important;
+      }
+
+      body {
+        padding-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Simple loading screen -->
+  <div id="loading" style="
+    position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);font-family:Fraunces,Georgia,serif;font-size:18px;
+    color:var(--text);z-index:9999;">
+    <div class="loading-inner" style="text-align:center;">
+      <div class="loading-kicker"
+           style="letter-spacing:.25em;font-size:11px;color:#8a7f78;font-family:'Inter Tight',sans-serif;
+                  margin-bottom:12px;text-transform:uppercase;">
+        UM-Aid IPA Quality Operations
+      </div>
+      <div class="loading-logo"
+           style="font-size:28px;font-weight:600;letter-spacing:-0.02em;margin-bottom:4px;">
+        Care Manager <em style="font-style:italic;color:#1f4a4a;font-weight:400;">NaviStation</em>
+      </div>
+      <div class="loading-tagline"
+           style="font-family:'Inter Tight',sans-serif;font-size:11px;letter-spacing:0.15em;
+                  text-transform:uppercase;color:#a39684;margin-bottom:24px;">
+        HEDIS &amp; STARS Measurement Year 2026
+      </div>
+      <div class="loading-bar" style="
+          width:180px;height:2px;background:#e8dcc8;border-radius:2px;margin:0 auto 16px;overflow:hidden;">
+        <div class="loading-bar-fill" style="
+            height:100%;background:#1f4a4a;border-radius:2px;animation:loadbar 1.4s ease-in-out infinite;"></div>
+      </div>
+      <div style="font-family:'Inter Tight',sans-serif;font-size:11px;color:#a39684;
+                  letter-spacing:0.15em;">
+        Initializing secure session
+        
